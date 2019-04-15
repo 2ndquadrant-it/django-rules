@@ -131,7 +131,7 @@ def permission_required(perm, fn=None, login_url=None, raise_exception=False, re
             # Check for permissions and return a response
             if not user.has_perms(perms, obj):
                 # User does not have a required permission
-                if raise_exception:
+                if raise_exception or user.is_authenticated:
                     raise PermissionDenied()
                 else:
                     return _redirect_to_login(request, view_func.__name__,
